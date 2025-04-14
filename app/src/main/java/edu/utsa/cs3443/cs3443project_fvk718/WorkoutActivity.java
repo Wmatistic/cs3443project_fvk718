@@ -53,7 +53,7 @@ public class WorkoutActivity extends AppCompatActivity {
         Button addExerciseButton = findViewById(R.id.addExerciseButton);
         addExerciseButton.setOnClickListener(view -> {
             //startActivity(addExerciseIntent);
-            workout.addExercise(new Exercise("Bouncing on it", 120, "Barbell", "Pelvis", "Weight & Reps"));
+            workout.addExercise(new Exercise("Bench Press", 120, "Barbell", "Biceps", "Weight & Reps"));
             refreshList();
 
             for (Exercise e : workout.getExercises()) {
