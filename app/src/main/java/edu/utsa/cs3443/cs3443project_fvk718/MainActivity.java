@@ -11,6 +11,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.io.File;
+import java.io.IOException;
+
 import edu.utsa.cs3443.cs3443project_fvk718.model.RoutineListAdapter;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Routines;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
@@ -18,6 +21,8 @@ import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
 public class MainActivity extends AppCompatActivity {
 
     private Routines routines;
+    private Intent workoutIntent;
+    private int workoutPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
         loadRoutines();
 
-        Intent intent = new Intent(MainActivity.this, WorkoutActivity.class);
+        workoutIntent = new Intent(MainActivity.this, WorkoutActivity.class);
 
         Button emptyWorkout = findViewById(R.id.emptyWorkoutButton);
         emptyWorkout.setOnClickListener(view -> {
-            intent.putExtra("Workout", new Workout(""));
-            startActivity(intent);
+            workoutIntent.putExtra("Workout", new Workout(MainActivity.this));
+            startActivity(workoutIntent);
         });
 
         ListView listView = findViewById(R.id.routineList);
@@ -48,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
             routineNames[i] = routines.getWorkouts().get(i).getName();
         }
 
-        RoutineListAdapter adapter = new RoutineListAdapter(this, routineNames);
+        RoutineListAdapter adapter = new RoutineListAdapter(this, routineNames, routines);
         listView.setAdapter(adapter);
+
     }
 
     private void loadRoutines() {

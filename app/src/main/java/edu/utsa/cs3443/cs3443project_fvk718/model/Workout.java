@@ -1,16 +1,30 @@
 package edu.utsa.cs3443.cs3443project_fvk718.model;
 
+import android.content.res.AssetManager;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import edu.utsa.cs3443.cs3443project_fvk718.MainActivity;
 
 public class Workout implements Serializable {
 
     private String name;
     private ArrayList<Exercise> exercises;
 
-    public Workout (String name) {
+    public Workout (MainActivity activity) {
+        this.name = "New Workout";
+        this.exercises = new ArrayList<>();
+    }
+
+    public Workout (String name, MainActivity activity) {
         this.name = name;
-        this.exercises = loadExercises();
+        this.exercises = new ArrayList<>();
+
+        loadExercises(activity);
     }
 
     public void addExercise(Exercise exercise) {
@@ -26,8 +40,38 @@ public class Workout implements Serializable {
         return null;
     }
 
-    private ArrayList<Exercise> loadExercises() {
-        return new ArrayList<>();
+    private void loadExercises(MainActivity activity) {
+        AssetManager manager = activity.getAssets();
+        Scanner sc = null;
+        String workoutFilename = name.replaceAll("\\s+", "") + ".csv";
+
+        try {
+            InputStream file = manager.open(workoutFilename);
+            sc = new Scanner(file);
+
+            sc.nextLine();
+            sc.nextLine();
+
+            Exercise exercise = null;
+
+            while (sc.hasNextLine()) {
+                String[] exerciseInfo = sc.nextLine().split(",");
+
+                if (exerciseInfo.length == 5) {
+                    exercise = new Exercise(exerciseInfo[0].trim(), Integer.parseInt(exerciseInfo[1].trim()), exerciseInfo[2].trim(), exerciseInfo[3].trim(), exerciseInfo[4].trim());
+                    addExercise(exercise);
+                } else if (exerciseInfo.length == 3) {
+                    if (exercise != null) {
+                        exercise.getSets().add(Integer.parseInt(exerciseInfo[1].trim()));
+                        exercise.getSets().add(Integer.parseInt(exerciseInfo[2].trim()));
+                    }
+                } else if (exerciseInfo.length == 0){
+                    exercise = null;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public ArrayList<Exercise> getExercises() {

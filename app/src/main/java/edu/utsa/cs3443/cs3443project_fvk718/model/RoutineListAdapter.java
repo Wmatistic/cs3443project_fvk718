@@ -2,6 +2,7 @@ package edu.utsa.cs3443.cs3443project_fvk718.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +14,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import edu.utsa.cs3443.cs3443project_fvk718.MainActivity;
 import edu.utsa.cs3443.cs3443project_fvk718.R;
+import edu.utsa.cs3443.cs3443project_fvk718.WorkoutActivity;
 
 public class RoutineListAdapter extends ArrayAdapter<String> {
     private final Activity context;
 
     private final String[] routineNames;
+    private final Routines routines;
 
-    public RoutineListAdapter (Activity context, String[] routineNames) {
+    public RoutineListAdapter (Activity context, String[] routineNames, Routines routines) {
         super(context, R.layout.routinelistitem, routineNames);
         this.context = context;
         this.routineNames = routineNames;
+        this.routines = routines;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertViet, @NonNull ViewGroup parent) {
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.routinelistitem, null, true);
 
@@ -38,6 +43,13 @@ public class RoutineListAdapter extends ArrayAdapter<String> {
 
         workoutNameText.setText(routineNames[position]);
         routineButton.setText("");
+
+        Intent intent = new Intent(context, WorkoutActivity.class);
+
+        startWorkoutButton.setOnClickListener(view -> {
+            intent.putExtra("Workout", routines.getWorkouts().get(position));
+            context.startActivity(intent);
+        });
 
         return rowView;
     }
