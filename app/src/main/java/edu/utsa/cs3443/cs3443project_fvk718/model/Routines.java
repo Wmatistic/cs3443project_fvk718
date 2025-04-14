@@ -27,19 +27,20 @@ public class Routines implements Serializable {
     }
 
     private void loadWorkouts(MainActivity activity) {
-        AssetManager manager = activity.getAssets();
         Scanner sc = null;
 
         try {
-            String[] fileNames = manager.list("");
+            String[] fileNames = activity.getFilesDir().list();
 
             if (fileNames != null) {
                 for (String f : fileNames) {
                     if (f.endsWith(".csv")) {
-                        InputStream file = manager.open(f);
+                        InputStream file = activity.openFileInput(f);
                         sc = new Scanner(file);
 
-                        addWorkout(new Workout(sc.nextLine(), activity));
+                        String nextLine = sc.nextLine();
+
+                        addWorkout(new Workout(nextLine, activity));
                     }
                 }
             }

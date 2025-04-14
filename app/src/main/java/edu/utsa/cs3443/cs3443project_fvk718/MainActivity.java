@@ -1,6 +1,7 @@
 package edu.utsa.cs3443.cs3443project_fvk718;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
@@ -14,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.File;
 import java.io.IOException;
 
+import edu.utsa.cs3443.cs3443project_fvk718.model.FileUtils;
 import edu.utsa.cs3443.cs3443project_fvk718.model.RoutineListAdapter;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Routines;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
@@ -34,13 +36,24 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        boolean isFirstRun = prefs.getBoolean("isFirstRun", true);
+
+        if (isFirstRun) {
+            FileUtils.copyAssetsFolderToInternalStorage(this, "");
+
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("isFirstRun", false);
+            editor.apply();
+        }
+
         loadRoutines();
 
         workoutIntent = new Intent(MainActivity.this, WorkoutActivity.class);
 
         Button emptyWorkout = findViewById(R.id.emptyWorkoutButton);
         emptyWorkout.setOnClickListener(view -> {
-            workoutIntent.putExtra("Workout", new Workout());
+            workoutIntent.putExtra("Workout", new Workout(this));
             startActivity(workoutIntent);
         });
 

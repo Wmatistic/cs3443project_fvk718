@@ -58,8 +58,14 @@ public class WorkoutActivity extends AppCompatActivity {
         addExerciseButton.setOnClickListener(view -> {
             addExerciseIntent.putExtra("Workout", workout);
             startActivity(addExerciseIntent);
-//            workout.addExercise(new Exercise("Bench Press", 120, "Barbell", "Biceps", "Weight & Reps"));
-//            refreshList();
+        });
+
+        Intent finishIntent = new Intent(WorkoutActivity.this, MainActivity.class);
+
+        Button finishButton = findViewById(R.id.finishButton);
+        finishButton.setOnClickListener(view -> {
+            workout.saveWorkout(this);
+            startActivity(finishIntent);
         });
     }
 
