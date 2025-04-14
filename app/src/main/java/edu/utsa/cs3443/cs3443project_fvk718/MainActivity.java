@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Routines routines;
     private Intent workoutIntent;
-    private int workoutPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button emptyWorkout = findViewById(R.id.emptyWorkoutButton);
         emptyWorkout.setOnClickListener(view -> {
-            workoutIntent.putExtra("Workout", new Workout(MainActivity.this));
+            workoutIntent.putExtra("Workout", new Workout());
             startActivity(workoutIntent);
         });
 
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         RoutineListAdapter adapter = new RoutineListAdapter(this, routineNames, routines);
         listView.setAdapter(adapter);
-
     }
 
     private void loadRoutines() {

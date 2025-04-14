@@ -46,11 +46,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/exerciseNameInput"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
+        android:textColorHint="#005B54"
+        app:boxCornerRadiusBottomEnd="20px"
+        app:boxCornerRadiusBottomStart="20px"
+        app:boxCornerRadiusTopEnd="20px"
+        app:boxCornerRadiusTopStart="20px"
+        app:cursorColor="#005B54"
+        app:helperTextTextColor="#005B54"
+        app:hintTextColor="#005B54"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3">
@@ -59,7 +67,10 @@
             android:id="@+id/exerciseNameInputText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Exercise Name" />
+            android:background="#232222"
+            android:hint="Exercise Name"
+            android:textColor="#FFFFFFFF"
+            android:textColorLink="@android:color/transparent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -155,6 +166,18 @@
         app:layout_constraintTop_toTopOf="@+id/muscleGroupButton" />
 
     <TextView
+        android:id="@+id/rightArrowTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text=">"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/exerciseTypeButton"
+        app:layout_constraintEnd_toEndOf="@+id/exerciseTypeButton"
+        app:layout_constraintTop_toTopOf="@+id/exerciseTypeButton" />
+
+    <TextView
         android:id="@+id/equipmentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -195,7 +218,7 @@
         app:layout_constraintTop_toBottomOf="@+id/muscleGroupText" />
 
     <TextView
-        android:id="@+id/muscleGroupSelectedText2"
+        android:id="@+id/exerciseSelectedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

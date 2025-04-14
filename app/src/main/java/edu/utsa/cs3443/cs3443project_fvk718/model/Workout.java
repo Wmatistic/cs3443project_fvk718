@@ -15,7 +15,7 @@ public class Workout implements Serializable {
     private String name;
     private ArrayList<Exercise> exercises;
 
-    public Workout (MainActivity activity) {
+    public Workout () {
         this.name = "New Workout";
         this.exercises = new ArrayList<>();
     }

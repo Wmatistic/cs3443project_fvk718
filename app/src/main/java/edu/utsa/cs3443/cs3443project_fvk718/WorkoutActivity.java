@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,9 @@ public class WorkoutActivity extends AppCompatActivity {
         Intent callingIntent = getIntent();
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
 
+        TextView workoutNameText = findViewById(R.id.workoutName);
+        workoutNameText.setText(workout.getName());
+
         exerciseList = findViewById(R.id.exerciseList);
 
         refreshList();
@@ -52,13 +56,10 @@ public class WorkoutActivity extends AppCompatActivity {
 
         Button addExerciseButton = findViewById(R.id.addExerciseButton);
         addExerciseButton.setOnClickListener(view -> {
-            //startActivity(addExerciseIntent);
-            workout.addExercise(new Exercise("Bench Press", 120, "Barbell", "Biceps", "Weight & Reps"));
-            refreshList();
-
-            for (Exercise e : workout.getExercises()) {
-                System.out.println(e.getName());
-            }
+            addExerciseIntent.putExtra("Workout", workout);
+            startActivity(addExerciseIntent);
+//            workout.addExercise(new Exercise("Bench Press", 120, "Barbell", "Biceps", "Weight & Reps"));
+//            refreshList();
         });
     }
 
