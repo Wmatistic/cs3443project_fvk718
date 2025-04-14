@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#101010"
+    tools:context=".AddExerciseActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#232222"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#005B54"
+        android:text="Save"
+        android:textSize="16sp"
+        app:cornerRadius="20px"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addExerciseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Exercise"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/exerciseNameInput"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/exerciseNameInputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Exercise Name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/equipmentButton"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#232222"
+        android:text="Button"
+        app:cornerRadius="20px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseNameInput" />
+
+    <Button
+        android:id="@+id/muscleGroupButton"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#232222"
+        android:text="Button"
+        app:cornerRadius="20px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/equipmentButton" />
+
+    <Button
+        android:id="@+id/exerciseTypeButton"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#232222"
+        android:text="Button"
+        app:cornerRadius="20px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/muscleGroupButton" />
+
+    <TextView
+        android:id="@+id/muscleGroupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Muscle Group"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/muscleGroupButton"
+        app:layout_constraintTop_toTopOf="@+id/muscleGroupButton" />
+
+    <TextView
+        android:id="@+id/exerciseTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Exercise Type"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/exerciseTypeButton"
+        app:layout_constraintTop_toTopOf="@+id/exerciseTypeButton" />
+
+    <TextView
+        android:id="@+id/rightArrowTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text=">"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/equipmentButton"
+        app:layout_constraintEnd_toEndOf="@+id/equipmentButton"
+        app:layout_constraintTop_toTopOf="@+id/equipmentButton" />
+
+    <TextView
+        android:id="@+id/rightArrowTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text=">"
+        android:textColor="#FFFFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/muscleGroupButton"
+        app:layout_constraintEnd_toEndOf="@+id/muscleGroupButton"
+        app:layout_constraintTop_toTopOf="@+id/muscleGroupButton" />
+
+    <TextView
+        android:id="@+id/equipmentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Equipment"
+        android:textColor="#FFFFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/equipmentButton"
+        app:layout_constraintTop_toTopOf="@+id/equipmentButton" />
+
+    <TextView
+        android:id="@+id/equipmentSelectedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Select"
+        android:textColor="#005B54"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/equipmentButton"
+        app:layout_constraintStart_toStartOf="@+id/equipmentButton"
+        app:layout_constraintTop_toBottomOf="@+id/equipmentText" />
+
+    <TextView
+        android:id="@+id/muscleGroupSelectedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Select"
+        android:textColor="#005B54"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/muscleGroupButton"
+        app:layout_constraintStart_toStartOf="@+id/muscleGroupButton"
+        app:layout_constraintTop_toBottomOf="@+id/muscleGroupText" />
+
+    <TextView
+        android:id="@+id/muscleGroupSelectedText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Select"
+        android:textColor="#005B54"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/exerciseTypeButton"
+        app:layout_constraintStart_toStartOf="@+id/exerciseTypeButton"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseTypeText"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
