@@ -2,6 +2,7 @@ package edu.utsa.cs3443.cs3443project_fvk718;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -13,7 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 import edu.utsa.cs3443.cs3443project_fvk718.model.Exercise;
 import edu.utsa.cs3443.cs3443project_fvk718.model.ExerciseListAdapter;
@@ -35,8 +39,21 @@ public class WorkoutActivity extends AppCompatActivity {
             return insets;
         });
 
+        TextInputLayout workoutNameInput = findViewById(R.id.workoutNameInput);
+        Button saveWorkoutButton = findViewById(R.id.saveWorkoutButton);
+
+        saveWorkoutButton.setVisibility(View.GONE);
+        workoutNameInput.setVisibility(View.GONE);
+
+
         Intent callingIntent = getIntent();
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
+
+        for(Exercise e : workout.getExercises()) {
+            for(int i : e.getSets()) {
+                System.out.println(i);
+            }
+        }
 
         TextView workoutNameText = findViewById(R.id.workoutName);
         workoutNameText.setText(workout.getName());
@@ -60,12 +77,22 @@ public class WorkoutActivity extends AppCompatActivity {
             startActivity(addExerciseIntent);
         });
 
-        Intent finishIntent = new Intent(WorkoutActivity.this, MainActivity.class);
-
         Button finishButton = findViewById(R.id.finishButton);
         finishButton.setOnClickListener(view -> {
+            exerciseList.setVisibility(View.INVISIBLE);
+
+            saveWorkoutButton.setVisibility(View.VISIBLE);
+            workoutNameInput.setVisibility(View.VISIBLE);
+        });
+
+        Intent saveIntent = new Intent(WorkoutActivity.this, MainActivity.class);
+
+        saveWorkoutButton.setOnClickListener(view -> {
+            if(!workoutNameInput.getEditText().getText().toString().isEmpty()) {
+                workout.setName(Objects.requireNonNull(workoutNameInput.getEditText()).getText().toString());
+            }
             workout.saveWorkout(this);
-            startActivity(finishIntent);
+            startActivity(saveIntent);
         });
     }
 

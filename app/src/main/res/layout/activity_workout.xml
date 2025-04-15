@@ -95,4 +95,42 @@
         app:layout_constraintEnd_toEndOf="@+id/toolbar2"
         app:layout_constraintTop_toTopOf="@id/toolbar2" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/workoutNameInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="#232222"
+        android:hint="Workout Name"
+        android:textColorHint="#005B54"
+        app:hintTextColor="#005B54"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="hint"
+            android:textColor="#FFFF"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/saveWorkoutButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#005B54"
+        android:text="Save"
+        android:textSize="18sp"
+        app:cornerRadius="20px"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutNameInput" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

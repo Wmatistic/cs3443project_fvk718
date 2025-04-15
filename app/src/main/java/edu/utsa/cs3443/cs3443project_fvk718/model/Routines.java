@@ -26,6 +26,15 @@ public class Routines implements Serializable {
         workouts.add(workout);
     }
 
+    public void deleteWorkout(Workout workout, MainActivity activity) {
+        workouts.remove(workout);
+
+        File dir = activity.getFilesDir();
+        System.out.println(workout.getName().trim() + ".csv");
+        File deletedWorkout = new File(dir, workout.getName().replaceAll("\\s+", "") + ".csv");
+        deletedWorkout.delete();
+    }
+
     private void loadWorkouts(MainActivity activity) {
         Scanner sc = null;
 

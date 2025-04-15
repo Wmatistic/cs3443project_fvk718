@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -40,14 +41,20 @@ public class RoutineListAdapter extends ArrayAdapter<String> {
         TextView workoutNameText = rowView.findViewById(R.id.workoutNameTextView);
         Button routineButton = rowView.findViewById(R.id.routineButton);
         Button startWorkoutButton = rowView.findViewById(R.id.startWorkoutButton);
+        ImageView deleteWorkoutImage = rowView.findViewById(R.id.deleteWorkoutImage);
 
         workoutNameText.setText(routineNames[position]);
         routineButton.setText("");
 
-        Intent intent = new Intent(context, WorkoutActivity.class);
+        Intent startWorkoutIntent = new Intent(context, WorkoutActivity.class);
         startWorkoutButton.setOnClickListener(view -> {
-            intent.putExtra("Workout", routines.getWorkouts().get(position));
-            context.startActivity(intent);
+            startWorkoutIntent.putExtra("Workout", new Workout(routines.getWorkouts().get(position).getName(), (MainActivity) context));
+            context.startActivity(startWorkoutIntent);
+        });
+
+        deleteWorkoutImage.setOnClickListener(view -> {
+            routines.deleteWorkout(routines.getWorkouts().get(position), (MainActivity) context);
+            context.recreate();
         });
 
         return rowView;
