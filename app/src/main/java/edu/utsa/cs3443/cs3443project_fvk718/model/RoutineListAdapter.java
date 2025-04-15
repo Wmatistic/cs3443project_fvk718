@@ -48,6 +48,7 @@ public class RoutineListAdapter extends ArrayAdapter<String> {
 
         Intent startWorkoutIntent = new Intent(context, WorkoutActivity.class);
         startWorkoutButton.setOnClickListener(view -> {
+            // TODO: fix this it's messy asl :(
             startWorkoutIntent.putExtra("Workout", new Workout(routines.getWorkouts().get(position).getName(), (MainActivity) context));
             context.startActivity(startWorkoutIntent);
         });
