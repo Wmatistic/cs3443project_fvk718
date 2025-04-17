@@ -21,7 +21,6 @@ import edu.utsa.cs3443.cs3443project_fvk718.WorkoutActivity;
 
 public class RoutineListAdapter extends ArrayAdapter<String> {
     private final Activity context;
-
     private final String[] routineNames;
     private final Routines routines;
 
@@ -47,11 +46,17 @@ public class RoutineListAdapter extends ArrayAdapter<String> {
         routineButton.setText("");
 
         Intent startWorkoutIntent = new Intent(context, WorkoutActivity.class);
-        startWorkoutButton.setOnClickListener(view -> {
-            // TODO: fix this it's messy asl :(
-            startWorkoutIntent.putExtra("Workout", new Workout(routines.getWorkouts().get(position).getName(), (MainActivity) context));
-            context.startActivity(startWorkoutIntent);
-        });
+        View.OnClickListener startWorkoutListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO: Fix this it's messy asl :(
+                startWorkoutIntent.putExtra("Workout", new Workout(routines.getWorkouts().get(position).getName(), (MainActivity) context));
+                context.startActivity(startWorkoutIntent);
+            }
+        };
+
+        startWorkoutButton.setOnClickListener(startWorkoutListener);
+        routineButton.setOnClickListener(startWorkoutListener);
 
         deleteWorkoutImage.setOnClickListener(view -> {
             routines.deleteWorkout(routines.getWorkouts().get(position), (MainActivity) context);

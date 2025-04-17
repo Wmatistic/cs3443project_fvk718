@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:hint="Weight"
+        android:textColorHint="#FFF"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@id/repsInput"
         app:layout_constraintTop_toTopOf="@+id/cardView">
@@ -66,6 +67,7 @@
         android:layout_marginEnd="20dp"
         android:hint="Reps"
         android:textAlignment="center"
+        android:textColorHint="#FFF"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@+id/deleteSetImage"
         app:layout_constraintTop_toTopOf="@+id/cardView">

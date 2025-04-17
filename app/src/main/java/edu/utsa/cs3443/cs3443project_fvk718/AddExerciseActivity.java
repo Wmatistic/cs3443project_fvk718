@@ -53,6 +53,14 @@ public class AddExerciseActivity extends AppCompatActivity {
 
         Button saveButton = findViewById(R.id.saveButton);
 
+        TextView cancelExerciseText = findViewById(R.id.cancelExerciseText);
+
+        Intent cancelIntent = new Intent(AddExerciseActivity.this, WorkoutActivity.class);
+        cancelExerciseText.setOnClickListener(view -> {
+            cancelIntent.putExtra("Workout", workout);
+            startActivity(cancelIntent);
+        });
+
         equipmentButton.setOnClickListener(view -> {
             equipmentSelectedText.setError(null);
 
