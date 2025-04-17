@@ -20,7 +20,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/exerciseName"
@@ -47,19 +49,6 @@
         app:layout_constraintStart_toStartOf="@+id/cardView2"
         app:layout_constraintTop_toBottomOf="@+id/exerciseName" />
 
-    <ListView
-        android:id="@+id/setList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toTopOf="@id/addSetButton"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/restTimerText" />
-
     <Button
         android:id="@+id/addSetButton"
         android:layout_width="0dp"
@@ -74,5 +63,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="@+id/cardView2"
         app:layout_constraintStart_toStartOf="@+id/cardView2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/setList"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/addSetButton"
+        app:layout_constraintEnd_toEndOf="@id/cardView2"
+        app:layout_constraintStart_toStartOf="@id/cardView2"
+        app:layout_constraintTop_toBottomOf="@+id/restTimerText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

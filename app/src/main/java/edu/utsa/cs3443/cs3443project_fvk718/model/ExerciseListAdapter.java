@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -26,7 +28,8 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
 
     private final ArrayList<String> exerciseNames;
     private final ArrayList<Integer> restTimers;
-    private ListView setList;
+    private RecyclerView[] setList;
+    private SetListAdapter adapter;
 
     public ExerciseListAdapter(Activity context, Workout workout, ArrayList<String> exerciseNames, ArrayList<Integer> restTimers) {
         super(context, R.layout.exerciselistitem, exerciseNames);
@@ -34,6 +37,8 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         this.workout = workout;
         this.exerciseNames = exerciseNames;
         this.restTimers = restTimers;
+
+        this.setList = new RecyclerView[workout.getExercises().size()];
     }
 
     @NonNull
@@ -45,18 +50,15 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         TextView nameText = rowView.findViewById(R.id.exerciseName);
         TextView restTimer = rowView.findViewById(R.id.restTimerText);
 
-        setList = rowView.findViewById(R.id.setList);
+        setList[position] = rowView.findViewById(R.id.setList);
 
-        refreshList(workout.getExercises().get(position));
+        refreshList(workout.getExercises().get(position), position);
 
         Button addSetButton = rowView.findViewById(R.id.addSetButton);
         addSetButton.setOnClickListener(view -> {
             workout.getExercises().get(position).getSets().add(0);
             workout.getExercises().get(position).getSets().add(0);
-            for (int i = 0; i < workout.getExercises().get(position).getSets().size(); i++) {
-                System.out.println(workout.getExercises().get(position).getSets().get(i));
-            }
-            refreshList(workout.getExercises().get(position));
+            refreshList(workout.getExercises().get(position), position);
         });
 
         nameText.setText(exerciseNames.get(position));
@@ -65,7 +67,7 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 
-    public void refreshList(Exercise exercise) {
+    public void refreshList(Exercise exercise, int position) {
         ArrayList<String> setNames = new ArrayList<>();
         ArrayList<Integer> setNumbers = new ArrayList<>();
         ArrayList<Integer> weights = new ArrayList<>();
@@ -74,11 +76,15 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         for (int i = 0; i < exercise.getSets().size()/2; i++) {
             setNames.add("set" + (i+1));
             setNumbers.add(i+1);
+        }
+
+        for (int i = 0; i < exercise.getSets().size(); i+=2) {
             weights.add(exercise.getSets().get(i));
             reps.add(exercise.getSets().get(i+1));
         }
 
-        SetListAdapter adapter = new SetListAdapter(this.context, setNames, setNumbers, weights, reps);
-        setList.setAdapter(adapter);
+        adapter = new SetListAdapter(this.context, setNames, setNumbers, weights, reps);
+        setList[position].setAdapter(adapter);
+        setList[position].setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 }

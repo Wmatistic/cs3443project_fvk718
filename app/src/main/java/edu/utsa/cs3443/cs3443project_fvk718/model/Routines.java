@@ -30,7 +30,6 @@ public class Routines implements Serializable {
         workouts.remove(workout);
 
         File dir = activity.getFilesDir();
-        System.out.println(workout.getName().trim() + ".csv");
         File deletedWorkout = new File(dir, workout.getName().replaceAll("\\s+", "") + ".csv");
         deletedWorkout.delete();
     }

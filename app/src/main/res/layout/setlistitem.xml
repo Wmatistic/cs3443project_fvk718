@@ -10,10 +10,10 @@
         android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
         android:background="#232222"
         android:backgroundTint="#232222"
         android:translationZ="-100dp"
@@ -43,9 +43,7 @@
         android:id="@+id/weightInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="10dp"
         android:hint="Weight"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@id/repsInput"
@@ -56,16 +54,14 @@
             android:layout_height="wrap_content"
             android:hint="Weight"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/repsInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
         android:hint="Reps"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
@@ -77,6 +73,6 @@
             android:layout_height="wrap_content"
             android:hint="Weight"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

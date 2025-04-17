@@ -45,15 +45,17 @@ public class WorkoutActivity extends AppCompatActivity {
         saveWorkoutButton.setVisibility(View.GONE);
         workoutNameInput.setVisibility(View.GONE);
 
-
         Intent callingIntent = getIntent();
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
 
-        for(Exercise e : workout.getExercises()) {
-            for(int i : e.getSets()) {
-                System.out.println(i);
-            }
-        }
+        // TODO: remove
+//        for (Exercise exercise : workout.getExercises()) {
+//            System.out.println("Exercise Name: " + exercise.getName());
+//            for (int i : exercise.getSets()) {
+//                System.out.print(i + ", ");
+//            }
+//            System.out.println("\n");
+//        }
 
         TextView workoutNameText = findViewById(R.id.workoutName);
         workoutNameText.setText(workout.getName());

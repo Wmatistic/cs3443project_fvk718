@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 
 import edu.utsa.cs3443.cs3443project_fvk718.R;
 
-public class SetListAdapter extends ArrayAdapter<String> {
+public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHolder> {
     private final Activity context;
 
     private final ArrayList<String> setNames;
@@ -24,11 +23,21 @@ public class SetListAdapter extends ArrayAdapter<String> {
     private final ArrayList<Integer> weights;
     private final ArrayList<Integer> reps;
 
-    public SetListAdapter(Activity context, ArrayList<String> setNames, ArrayList<Integer> setNumbers, ArrayList<Integer> weights, ArrayList<Integer> reps) {
-        super(context, R.layout.setlistitem, setNames);
-        for(String i : setNames) {
-            System.out.println(i);
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView setNumber;
+        public TextInputLayout setWeight;
+        public TextInputLayout setReps;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            setNumber = itemView.findViewById(R.id.setNumber);
+            setWeight = itemView.findViewById(R.id.weightInput);
+            setReps = itemView.findViewById(R.id.repsInput);
         }
+    }
+
+    public SetListAdapter(Activity context, ArrayList<String> setNames, ArrayList<Integer> setNumbers, ArrayList<Integer> weights, ArrayList<Integer> reps) {
         this.context = context;
         this.setNames = setNames;
         this.setNumbers = setNumbers;
@@ -38,16 +47,20 @@ public class SetListAdapter extends ArrayAdapter<String> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.setlistitem, null, true);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.setlistitem, viewGroup, false);
+        return new MyViewHolder(itemView);
+    }
 
-        TextView setNumber = rowView.findViewById(R.id.setNumber);
-        TextInputLayout setWeight = rowView.findViewById(R.id.weightInput);
-        TextInputLayout reps = rowView.findViewById(R.id.repsInput);
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
+        myViewHolder.setNumber.setText(String.valueOf(setNumbers.get(position)));
+        myViewHolder.setWeight.setHint(String.valueOf(weights.get(position)));
+        myViewHolder.setReps.setHint(String.valueOf(reps.get(position)));
+    }
 
-        setNumber.setText(setNumbers.get(position));
-
-        return rowView;
+    @Override
+    public int getItemCount() {
+        return setNumbers.size();
     }
 }

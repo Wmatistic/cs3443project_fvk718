@@ -46,7 +46,7 @@ public class Workout implements Serializable {
                 out.write((e.getName() + ", " + e.getRestTimer() + ", " + e.getEquipment() + ", " + e.getMuscleGroup() + ", " + e.getType() + "\n").getBytes(StandardCharsets.UTF_8));
 
                 for (int i = 0; i < e.getSets().size(); i+=2) {
-                    out.write((((i/2)+1) + " " + e.getSets().get(i) + " " + e.getSets().get(i+1) + "\n").getBytes(StandardCharsets.UTF_8));
+                    out.write((((i/2)+1) + ", " + e.getSets().get(i) + ", " + e.getSets().get(i+1) + "\n").getBytes(StandardCharsets.UTF_8));
                 }
 
                 out.write(("\n").getBytes(StandardCharsets.UTF_8));
@@ -73,7 +73,6 @@ public class Workout implements Serializable {
     }
 
     private void loadExercises(MainActivity activity) {
-        AssetManager manager = activity.getAssets();
         Scanner sc = null;
         String workoutFilename = name.replaceAll("\\s+", "") + ".csv";
 
