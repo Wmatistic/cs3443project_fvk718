@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button emptyWorkout = findViewById(R.id.emptyWorkoutButton);
         emptyWorkout.setOnClickListener(view -> {
-            workoutIntent.putExtra("Workout", new Workout(this));
+            workoutIntent.putExtra("Workout", new Workout());
             startActivity(workoutIntent);
         });
 

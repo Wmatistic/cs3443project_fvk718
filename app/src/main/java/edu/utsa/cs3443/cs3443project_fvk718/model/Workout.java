@@ -21,7 +21,7 @@ public class Workout implements Serializable {
     private String name;
     private ArrayList<Exercise> exercises;
 
-    public Workout (MainActivity activity) {
+    public Workout () {
 
         this.name = "New Workout";
         this.exercises = new ArrayList<>();
@@ -33,6 +33,10 @@ public class Workout implements Serializable {
         this.exercises = new ArrayList<>();
 
         loadExercises(activity);
+    }
+
+    public void deleteExercise(Exercise exercise) {
+        exercises.remove(exercise);
     }
 
     public void saveWorkout(WorkoutActivity activity) {

@@ -43,17 +43,19 @@
         android:id="@+id/weightInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="40dp"
         android:hint="Weight"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@id/repsInput"
         app:layout_constraintTop_toTopOf="@+id/cardView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/weightEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Weight"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,14 +67,26 @@
         android:hint="Reps"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@+id/deleteSetImage"
         app:layout_constraintTop_toTopOf="@+id/cardView">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/repsEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Weight"
             android:textAlignment="center"
+            android:textColor="#FFF"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/deleteSetImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/cardView"
+        app:layout_constraintEnd_toEndOf="@+id/cardView"
+        app:layout_constraintTop_toTopOf="@id/cardView"
+        app:srcCompat="@drawable/trash_can" />
 </androidx.constraintlayout.widget.ConstraintLayout>
