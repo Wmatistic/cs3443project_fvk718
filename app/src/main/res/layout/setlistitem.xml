@@ -91,4 +91,5 @@
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@id/cardView"
         app:srcCompat="@drawable/trash_can" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,15 +48,6 @@ public class WorkoutActivity extends AppCompatActivity {
         Intent callingIntent = getIntent();
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
 
-        // TODO: remove
-//        for (Exercise exercise : workout.getExercises()) {
-//            System.out.println("Exercise Name: " + exercise.getName());
-//            for (int i : exercise.getSets()) {
-//                System.out.print(i + ", ");
-//            }
-//            System.out.println("\n");
-//        }
-
         TextView workoutNameText = findViewById(R.id.workoutName);
         workoutNameText.setText(workout.getName());
 
@@ -68,6 +59,11 @@ public class WorkoutActivity extends AppCompatActivity {
 
         Button discardButton = findViewById(R.id.discardWorkoutButton);
         discardButton.setOnClickListener(view -> {
+            startActivity(discardIntent);
+        });
+
+        TextView cancelButton = findViewById(R.id.cancelWorkoutText);
+        cancelButton.setOnClickListener(view -> {
             startActivity(discardIntent);
         });
 
@@ -96,6 +92,10 @@ public class WorkoutActivity extends AppCompatActivity {
             workout.saveWorkout(this);
             startActivity(saveIntent);
         });
+    }
+
+    public static void exampleMethod() {
+
     }
 
     public void refreshList() {

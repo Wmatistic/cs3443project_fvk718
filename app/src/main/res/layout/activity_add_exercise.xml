@@ -77,23 +77,23 @@
         android:id="@+id/equipmentButton"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#232222"
         android:text="Button"
         app:cornerRadius="20px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exerciseNameInput" />
+        app:layout_constraintTop_toBottomOf="@+id/restTimerInput" />
 
     <Button
         android:id="@+id/muscleGroupButton"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#232222"
         android:text="Button"
         app:cornerRadius="20px"
@@ -106,9 +106,9 @@
         android:id="@+id/exerciseTypeButton"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:backgroundTint="#232222"
         android:text="Button"
         app:cornerRadius="20px"
@@ -243,5 +243,27 @@
         app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
         app:layout_constraintStart_toStartOf="@+id/toolbar3"
         app:layout_constraintTop_toTopOf="@+id/toolbar3" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/restTimerInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:hint="Rest Timer"
+        android:textColorHint="#FFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exerciseNameInput">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/restTimerInputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#232222"
+            android:hint="hint"
+            android:textColor="#FFF" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,13 +42,18 @@ public class AddExerciseActivity extends AppCompatActivity {
 
         TextInputLayout exerciseName = findViewById(R.id.exerciseNameInput);
 
+        TextInputLayout restTimer = findViewById(R.id.restTimerInput);
+
         Button equipmentButton = findViewById(R.id.equipmentButton);
+        equipmentButton.setText("");
         TextView equipmentSelectedText = findViewById(R.id.equipmentSelectedText);
 
         Button muscleGroupButton = findViewById(R.id.muscleGroupButton);
+        muscleGroupButton.setText("");
         TextView muscleGroupSelectedText = findViewById(R.id.muscleGroupSelectedText);
 
         Button exerciseTypeButton = findViewById(R.id.exerciseTypeButton);
+        exerciseTypeButton.setText("");
         TextView exerciseSelectedText = findViewById(R.id.exerciseSelectedText);
 
         Button saveButton = findViewById(R.id.saveButton);
@@ -90,6 +95,9 @@ public class AddExerciseActivity extends AppCompatActivity {
             if (Objects.requireNonNull(exerciseName.getEditText()).getText().toString().isEmpty()) {
                 exerciseName.setError("Exercise Name");
             }
+            if (Objects.requireNonNull(restTimer.getEditText()).getText().toString().isEmpty()) {
+                restTimer.setError("Rest Timer");
+            }
             if (equipment.isEmpty()) {
                 equipmentSelectedText.setError("Equipment");
             }
@@ -100,11 +108,15 @@ public class AddExerciseActivity extends AppCompatActivity {
                 exerciseSelectedText.setError("Exercise Type");
             }
 
-            if (!(Objects.requireNonNull(exerciseName.getEditText()).getText().toString().isEmpty() && equipment.isEmpty() && muscleGroup.isEmpty() && exerciseType.isEmpty())) {
-                workout.addExercise(new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), 0, equipment, muscleGroup, exerciseType));
+            try {
+                if (!(Objects.requireNonNull(exerciseName.getEditText()).getText().toString().isEmpty() && Objects.requireNonNull(restTimer.getEditText()).getText().toString().isEmpty() && equipment.isEmpty() && muscleGroup.isEmpty() && exerciseType.isEmpty())) {
+                    workout.addExercise(new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), Integer.parseInt(Objects.requireNonNull(restTimer.getEditText()).getText().toString()), equipment, muscleGroup, exerciseType));
 
-                intent.putExtra("Workout", workout);
-                startActivity(intent);
+                    intent.putExtra("Workout", workout);
+                    startActivity(intent);
+                }
+            }catch(NumberFormatException ignored){
+                restTimer.setError("Rest Timer");
             }
         });
     }

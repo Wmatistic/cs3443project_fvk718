@@ -64,7 +64,7 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         });
 
         nameText.setText(exerciseNames.get(position));
-        restTimer.setText("Rest Timer: " + restTimers.get(position));
+        restTimer.setText("Rest Timer: " + restTimers.get(position) + " seconds");
 
         deleteExerciseImage.setOnClickListener(view -> {
             workout.deleteExercise(workout.getExercises().get(position));
