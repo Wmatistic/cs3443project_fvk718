@@ -3,6 +3,7 @@ package edu.utsa.cs3443.cs3443project_fvk718;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -42,7 +43,7 @@ public class AddExerciseActivity extends AppCompatActivity {
 
         TextInputLayout exerciseName = findViewById(R.id.exerciseNameInput);
 
-        TextInputLayout restTimer = findViewById(R.id.restTimerInput);
+        EditText restTimer = findViewById(R.id.restTimerInput);
 
         Button equipmentButton = findViewById(R.id.equipmentButton);
         equipmentButton.setText("");
@@ -95,7 +96,7 @@ public class AddExerciseActivity extends AppCompatActivity {
             if (Objects.requireNonNull(exerciseName.getEditText()).getText().toString().isEmpty()) {
                 exerciseName.setError("Exercise Name");
             }
-            if (Objects.requireNonNull(restTimer.getEditText()).getText().toString().isEmpty()) {
+            if (Objects.requireNonNull(restTimer).getText().toString().isEmpty()) {
                 restTimer.setError("Rest Timer");
             }
             if (equipment.isEmpty()) {
@@ -109,8 +110,8 @@ public class AddExerciseActivity extends AppCompatActivity {
             }
 
             try {
-                if (!(Objects.requireNonNull(exerciseName.getEditText()).getText().toString().isEmpty() && Objects.requireNonNull(restTimer.getEditText()).getText().toString().isEmpty() && equipment.isEmpty() && muscleGroup.isEmpty() && exerciseType.isEmpty())) {
-                    workout.addExercise(new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), Integer.parseInt(Objects.requireNonNull(restTimer.getEditText()).getText().toString()), equipment, muscleGroup, exerciseType));
+                if (!(Objects.requireNonNull(exerciseName.getEditText()).getText().toString().isEmpty() && Objects.requireNonNull(restTimer).getText().toString().isEmpty() && equipment.isEmpty() && muscleGroup.isEmpty() && exerciseType.isEmpty())) {
+                    workout.addExercise(new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), Integer.parseInt(Objects.requireNonNull(restTimer).getText().toString()), equipment, muscleGroup, exerciseType));
 
                     intent.putExtra("Workout", workout);
                     startActivity(intent);

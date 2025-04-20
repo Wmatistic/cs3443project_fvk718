@@ -69,7 +69,7 @@
         android:textAlignment="center"
         android:textColorHint="#FFF"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
-        app:layout_constraintEnd_toStartOf="@+id/deleteSetImage"
+        app:layout_constraintEnd_toStartOf="@id/finishSetCheckBox"
         app:layout_constraintTop_toTopOf="@+id/cardView">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -91,5 +91,14 @@
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@id/cardView"
         app:srcCompat="@drawable/trash_can" />
+
+    <CheckBox
+        android:id="@+id/finishSetCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toStartOf="@+id/deleteSetImage"
+        app:layout_constraintTop_toTopOf="@+id/cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,9 @@
 package edu.utsa.cs3443.cs3443project_fvk718.model;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -38,6 +41,7 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
         public TextInputLayout setReps;
         public EditText repsEditText;
         public ImageView deleteSetImage;
+        public CheckBox finishSetCheckBox;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,6 +52,7 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
             setReps = itemView.findViewById(R.id.repsInput);
             repsEditText = itemView.findViewById(R.id.repsEditText);
             deleteSetImage = itemView.findViewById(R.id.deleteSetImage);
+            finishSetCheckBox = itemView.findViewById(R.id.finishSetCheckBox);
         }
     }
 
@@ -81,17 +86,21 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
         myViewHolder.setNumber.setText(String.valueOf(setNumbers.get(position)));
 
-        if (weights.get(position) == 0) {
+        SharedPreferences prefs = context.getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        boolean showPrevValues = prefs.getBoolean("showPrevValues", true);
+
+        if (weights.get(position) == 0 || !showPrevValues) {
             myViewHolder.setWeight.setHint("Weight");
         } else {
             myViewHolder.setWeight.setHint(String.valueOf(weights.get(position)));
         }
 
-        if (reps.get(position) == 0) {
+        if (reps.get(position) == 0 || !showPrevValues) {
             myViewHolder.setReps.setHint("Reps");
         } else {
             myViewHolder.setReps.setHint(String.valueOf(reps.get(position)));
         }
+        
 
         myViewHolder.deleteSetImage.setOnClickListener(view -> {
             exercise.getSets().remove((myViewHolder.getAdapterPosition()*2) + 1);

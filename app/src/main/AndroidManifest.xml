@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Cs3443project_fvk718"
         tools:targetApi="31">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddExerciseActivity"
             android:exported="false" />
         <activity

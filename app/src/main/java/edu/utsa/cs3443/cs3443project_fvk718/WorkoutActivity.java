@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,7 +18,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import edu.utsa.cs3443.cs3443project_fvk718.model.Exercise;
 import edu.utsa.cs3443.cs3443project_fvk718.model.ExerciseListAdapter;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
 
@@ -57,7 +55,7 @@ public class WorkoutActivity extends AppCompatActivity {
 
         Intent discardIntent = new Intent(WorkoutActivity.this, MainActivity.class);
 
-        Button discardButton = findViewById(R.id.discardWorkoutButton);
+        Button discardButton = findViewById(R.id.discardWorkoutButton2);
         discardButton.setOnClickListener(view -> {
             startActivity(discardIntent);
         });
@@ -65,6 +63,14 @@ public class WorkoutActivity extends AppCompatActivity {
         TextView cancelButton = findViewById(R.id.cancelWorkoutText);
         cancelButton.setOnClickListener(view -> {
             startActivity(discardIntent);
+        });
+
+        Intent settingsIntent = new Intent(WorkoutActivity.this, SettingsActivity.class);
+
+        Button settingsButton = findViewById(R.id.settingsButton);
+        settingsButton.setOnClickListener(view -> {
+            settingsIntent.putExtra("Workout", workout);
+            startActivity(settingsIntent);
         });
 
         Intent addExerciseIntent = new Intent(WorkoutActivity.this, AddExerciseActivity.class);
