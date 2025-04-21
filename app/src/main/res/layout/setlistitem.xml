@@ -46,6 +46,9 @@
         android:layout_marginEnd="20dp"
         android:hint="Weight"
         android:textColorHint="#FFF"
+        app:boxStrokeColor="#005B54"
+        app:cursorColor="#005B54"
+        app:hintTextColor="#FFF"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@id/repsInput"
         app:layout_constraintTop_toTopOf="@+id/cardView">
@@ -68,6 +71,10 @@
         android:hint="Reps"
         android:textAlignment="center"
         android:textColorHint="#FFF"
+        app:boxStrokeColor="#005B54"
+        app:boxStrokeWidth="1dp"
+        app:cursorColor="#005B54"
+        app:hintTextColor="#FFF"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@id/finishSetCheckBox"
         app:layout_constraintTop_toTopOf="@+id/cardView">
@@ -79,6 +86,7 @@
             android:hint="Weight"
             android:textAlignment="center"
             android:textColor="#FFF"
+            android:textColorLink="#005B54"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,6 +107,7 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toStartOf="@+id/deleteSetImage"
-        app:layout_constraintTop_toTopOf="@+id/cardView" />
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        app:buttonTint="#005B54"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

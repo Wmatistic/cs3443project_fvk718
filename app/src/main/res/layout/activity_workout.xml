@@ -84,6 +84,8 @@
         android:background="#232222"
         android:hint="Workout Name"
         android:textColorHint="#005B54"
+        app:boxStrokeColor="#005B54"
+        app:cursorColor="#005B54"
         app:hintTextColor="#005B54"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

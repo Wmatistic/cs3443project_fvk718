@@ -1,6 +1,7 @@
 package edu.utsa.cs3443.cs3443project_fvk718;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,9 @@ public class AddExerciseActivity extends AppCompatActivity {
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
         boolean editingExercise = callingIntent.getBooleanExtra("Editing Exercise", false);
         int exerciseIndex = callingIntent.getIntExtra("Exercise Index", 0);
+
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        int defaultSetNumber = prefs.getInt("defaultSetsNumber", 0);
 
         TextView addExerciseTitle = findViewById(R.id.addExerciseTitle);
 
@@ -139,7 +143,14 @@ public class AddExerciseActivity extends AppCompatActivity {
                         e.setMuscleGroup(muscleGroup);
                         e.setType(exerciseType);
                     } else {
-                        workout.addExercise(new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), Integer.parseInt(Objects.requireNonNull(restTimer).getText().toString()), equipment, muscleGroup, exerciseType));
+                        Exercise e = new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), Integer.parseInt(Objects.requireNonNull(restTimer).getText().toString()), equipment, muscleGroup, exerciseType);
+
+                        for(int i = 0; i < defaultSetNumber; i++) {
+                            e.getSets().add(0);
+                            e.getSets().add(0);
+                        }
+
+                        workout.addExercise(e);
                     }
 
                     intent.putExtra("Workout", workout);
