@@ -40,6 +40,10 @@ public class AddExerciseActivity extends AppCompatActivity {
 
         Intent callingIntent = getIntent();
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
+        boolean editingExercise = callingIntent.getBooleanExtra("Editing Exercise", false);
+        int exerciseIndex = callingIntent.getIntExtra("Exercise Index", 0);
+
+        TextView addExerciseTitle = findViewById(R.id.addExerciseTitle);
 
         TextInputLayout exerciseName = findViewById(R.id.exerciseNameInput);
 
@@ -58,8 +62,24 @@ public class AddExerciseActivity extends AppCompatActivity {
         TextView exerciseSelectedText = findViewById(R.id.exerciseSelectedText);
 
         Button saveButton = findViewById(R.id.saveButton);
-
         TextView cancelExerciseText = findViewById(R.id.cancelExerciseText);
+
+        if (editingExercise) {
+            addExerciseTitle.setText("Editing Exercise");
+
+            equipmentSelectedText.setText(workout.getExercises().get(exerciseIndex).getEquipment());
+            equipment = workout.getExercises().get(exerciseIndex).getEquipment();
+
+            muscleGroupSelectedText.setText(workout.getExercises().get(exerciseIndex).getMuscleGroup());
+            muscleGroup = workout.getExercises().get(exerciseIndex).getMuscleGroup();
+
+            exerciseSelectedText.setText(workout.getExercises().get(exerciseIndex).getType());
+            exerciseType = workout.getExercises().get(exerciseIndex).getType();
+
+            Objects.requireNonNull(exerciseName.getEditText()).setText(workout.getExercises().get(exerciseIndex).getName());
+
+            restTimer.setText(String.valueOf(workout.getExercises().get(exerciseIndex).getRestTimer()));
+        }
 
         Intent cancelIntent = new Intent(AddExerciseActivity.this, WorkoutActivity.class);
         cancelExerciseText.setOnClickListener(view -> {
@@ -111,7 +131,16 @@ public class AddExerciseActivity extends AppCompatActivity {
 
             try {
                 if (!(Objects.requireNonNull(exerciseName.getEditText()).getText().toString().isEmpty() && Objects.requireNonNull(restTimer).getText().toString().isEmpty() && equipment.isEmpty() && muscleGroup.isEmpty() && exerciseType.isEmpty())) {
-                    workout.addExercise(new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), Integer.parseInt(Objects.requireNonNull(restTimer).getText().toString()), equipment, muscleGroup, exerciseType));
+                    if (editingExercise) {
+                        Exercise e = workout.getExercises().get(exerciseIndex);
+                        e.setName(exerciseName.getEditText().getText().toString());
+                        e.setRestTimer(Integer.parseInt(restTimer.getText().toString()));
+                        e.setEquipment(equipment);
+                        e.setMuscleGroup(muscleGroup);
+                        e.setType(exerciseType);
+                    } else {
+                        workout.addExercise(new Exercise(Objects.requireNonNull(exerciseName.getEditText()).getText().toString(), Integer.parseInt(Objects.requireNonNull(restTimer).getText().toString()), equipment, muscleGroup, exerciseType));
+                    }
 
                     intent.putExtra("Workout", workout);
                     startActivity(intent);

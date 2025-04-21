@@ -2,9 +2,11 @@ package edu.utsa.cs3443.cs3443project_fvk718;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -19,12 +21,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import edu.utsa.cs3443.cs3443project_fvk718.model.ExerciseListAdapter;
+import edu.utsa.cs3443.cs3443project_fvk718.model.OnCheckboxCheckedListener;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
 
-public class WorkoutActivity extends AppCompatActivity {
+public class WorkoutActivity extends AppCompatActivity implements OnCheckboxCheckedListener {
 
     Workout workout;
     ListView exerciseList;
+    TextView restTimerTextView;
+    ProgressBar restProgressBar;
+    CountDownTimer activeRestTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,9 @@ public class WorkoutActivity extends AppCompatActivity {
 
         TextView workoutNameText = findViewById(R.id.workoutName);
         workoutNameText.setText(workout.getName());
+
+        restTimerTextView = findViewById(R.id.restTimerTextView);
+        restProgressBar = findViewById(R.id.restProgressBar);
 
         exerciseList = findViewById(R.id.exerciseList);
 
@@ -100,8 +109,30 @@ public class WorkoutActivity extends AppCompatActivity {
         });
     }
 
-    public static void exampleMethod() {
+    @Override
+    public void onCheckboxChecked(int restTimer) {
+        if (activeRestTimer != null) {
+            activeRestTimer.cancel();
+        }
 
+        int timerDuration = restTimer;
+
+        activeRestTimer = new CountDownTimer(timerDuration, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int progress = (int) (((double)(timerDuration - millisUntilFinished) / timerDuration) * 1000);
+                restProgressBar.setProgress(progress);
+
+                restTimerTextView.setText(String.valueOf(millisUntilFinished / 1000));
+            }
+
+            @Override
+            public void onFinish() {
+                restProgressBar.setProgress(1000);
+
+                restTimerTextView.setText("Rest Timer Over!");
+            }
+        }.start();
     }
 
     public void refreshList() {

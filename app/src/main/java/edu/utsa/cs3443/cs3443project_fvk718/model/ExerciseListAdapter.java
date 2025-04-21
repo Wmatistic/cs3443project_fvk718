@@ -1,6 +1,7 @@
 package edu.utsa.cs3443.cs3443project_fvk718.model;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.sql.Array;
 import java.util.ArrayList;
 
+import edu.utsa.cs3443.cs3443project_fvk718.AddExerciseActivity;
 import edu.utsa.cs3443.cs3443project_fvk718.MainActivity;
 import edu.utsa.cs3443.cs3443project_fvk718.R;
 import edu.utsa.cs3443.cs3443project_fvk718.WorkoutActivity;
@@ -51,6 +53,7 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         TextView nameText = rowView.findViewById(R.id.exerciseName);
         TextView restTimer = rowView.findViewById(R.id.restTimerText);
         ImageView deleteExerciseImage = rowView.findViewById(R.id.deleteExerciseImage);
+        Button editExerciseButton = rowView.findViewById(R.id.editExerciseButton);
 
         setList[position] = rowView.findViewById(R.id.setList);
 
@@ -71,11 +74,19 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
             context.recreate();
         });
 
+        Intent editIntent = new Intent(context, AddExerciseActivity.class);
+        editExerciseButton.setOnClickListener(view -> {
+            editIntent.putExtra("Workout", workout);
+            editIntent.putExtra("Editing Exercise", true);
+            editIntent.putExtra("Exercise Index", position);
+            context.startActivity(editIntent);
+        });
+
         return rowView;
     }
 
     public void refreshList(Exercise exercise, int position) {
-        adapter = new SetListAdapter(this.context, exercise);
+        adapter = new SetListAdapter(this.context, exercise, (OnCheckboxCheckedListener) context);
         setList[position].setAdapter(adapter);
         setList[position].setLayoutManager(new LinearLayoutManager(this.getContext()));
     }

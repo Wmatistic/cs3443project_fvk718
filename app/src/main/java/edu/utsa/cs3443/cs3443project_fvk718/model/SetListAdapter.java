@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import edu.utsa.cs3443.cs3443project_fvk718.R;
 
@@ -33,6 +32,8 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
     private final ArrayList<Integer> setNumbers;
     private final ArrayList<Integer> weights;
     private final ArrayList<Integer> reps;
+    private final int restTimer;
+    private final OnCheckboxCheckedListener listener;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView setNumber;
@@ -56,13 +57,15 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
         }
     }
 
-    public SetListAdapter(Activity context, Exercise exercise) {
+    public SetListAdapter(Activity context, Exercise exercise, OnCheckboxCheckedListener listener) {
         this.context = context;
         this.exercise = exercise;
         this.setNames = new ArrayList<>();
         this.setNumbers = new ArrayList<>();
         this.weights = new ArrayList<>();
         this.reps = new ArrayList<>();
+        this.restTimer = exercise.getRestTimer();
+        this.listener = listener;
 
         for (int i = 0; i < exercise.getSets().size()/2; i++) {
             setNames.add("set" + (i+1));
@@ -100,7 +103,17 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
         } else {
             myViewHolder.setReps.setHint(String.valueOf(reps.get(position)));
         }
-        
+
+        //myViewHolder.finishSetCheckBox.setOnCheckedChangeListener(null);
+        myViewHolder.finishSetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b && listener != null) {
+                    listener.onCheckboxChecked(restTimer * 1000);
+                }
+            }
+        });
 
         myViewHolder.deleteSetImage.setOnClickListener(view -> {
             exercise.getSets().remove((myViewHolder.getAdapterPosition()*2) + 1);
