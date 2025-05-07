@@ -3,21 +3,19 @@ package edu.utsa.cs3443.cs3443project_fvk718.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+// Exercise class representing an exercise in a workout, stores all relevant info
 public class Exercise implements Serializable {
-
-//    public enum Type {
-//
-//    }
-//
-//    public enum Equipment {
-//
-//    }
 
     private String name;
     private int restTimer;
     private String equipment;
     private String muscleGroup;
     private String type;
+
+    // The storage of sets works in an interesting way to allow the use of only one array
+    //      Both the reps and weight are stored in the array list together one after the other
+    //      The weight is stored first and then the reps are stored immediately after
+    //      When looping through the array list we loop by 2 and then take the weight and reps at i and i+1
     private ArrayList<Integer> sets;
 
     public Exercise (String name, int restTimer, String equipment, String muscleGroup, String type, ArrayList<Integer> sets) {

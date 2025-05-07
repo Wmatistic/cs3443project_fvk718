@@ -19,6 +19,7 @@ import edu.utsa.cs3443.cs3443project_fvk718.MainActivity;
 import edu.utsa.cs3443.cs3443project_fvk718.R;
 import edu.utsa.cs3443.cs3443project_fvk718.WorkoutActivity;
 
+// List adapter for the routine list
 public class RoutineListAdapter extends ArrayAdapter<String> {
     private final Activity context;
     private final String[] routineNames;
@@ -31,6 +32,7 @@ public class RoutineListAdapter extends ArrayAdapter<String> {
         this.routines = routines;
     }
 
+    // Method called when list item is created, used to set assets and functionality
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -45,11 +47,13 @@ public class RoutineListAdapter extends ArrayAdapter<String> {
         workoutNameText.setText(routineNames[position]);
         routineButton.setText("");
 
+        // Start workout functionality, this is implemented in a fairly messy way if i'm being honest
+        // This was early in development where I was still learning but it works so...
+        // DO NOT TOUCH WILL BREAK ENTIRE PROJECT
         Intent startWorkoutIntent = new Intent(context, WorkoutActivity.class);
         View.OnClickListener startWorkoutListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Fix this it's messy asl :(
                 startWorkoutIntent.putExtra("Workout", new Workout(routines.getWorkouts().get(position).getName(), (MainActivity) context));
                 context.startActivity(startWorkoutIntent);
             }
@@ -58,6 +62,7 @@ public class RoutineListAdapter extends ArrayAdapter<String> {
         startWorkoutButton.setOnClickListener(startWorkoutListener);
         routineButton.setOnClickListener(startWorkoutListener);
 
+        // Delete workout functionality
         deleteWorkoutImage.setOnClickListener(view -> {
             routines.deleteWorkout(routines.getWorkouts().get(position), (MainActivity) context);
             context.recreate();

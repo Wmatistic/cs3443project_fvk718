@@ -24,6 +24,7 @@ import edu.utsa.cs3443.cs3443project_fvk718.model.ExerciseListAdapter;
 import edu.utsa.cs3443.cs3443project_fvk718.model.OnCheckboxCheckedListener;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
 
+// Workout Screen
 public class WorkoutActivity extends AppCompatActivity implements OnCheckboxCheckedListener {
 
     Workout workout;
@@ -43,12 +44,14 @@ public class WorkoutActivity extends AppCompatActivity implements OnCheckboxChec
             return insets;
         });
 
+        // Workout save assets initialization
         TextInputLayout workoutNameInput = findViewById(R.id.workoutNameInput);
         Button saveWorkoutButton = findViewById(R.id.saveWorkoutButton);
 
         saveWorkoutButton.setVisibility(View.GONE);
         workoutNameInput.setVisibility(View.GONE);
 
+        // Getting current workout
         Intent callingIntent = getIntent();
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
 
@@ -60,8 +63,10 @@ public class WorkoutActivity extends AppCompatActivity implements OnCheckboxChec
 
         exerciseList = findViewById(R.id.exerciseList);
 
+        // Loading list with old / new info
         refreshList();
 
+        // Canceling workout functionality
         Intent discardIntent = new Intent(WorkoutActivity.this, MainActivity.class);
 
         Button discardButton = findViewById(R.id.discardWorkoutButton2);
@@ -74,6 +79,7 @@ public class WorkoutActivity extends AppCompatActivity implements OnCheckboxChec
             startActivity(discardIntent);
         });
 
+        // Settings page asset functionality
         Intent settingsIntent = new Intent(WorkoutActivity.this, SettingsActivity.class);
 
         Button settingsButton = findViewById(R.id.settingsButton);
@@ -82,6 +88,7 @@ public class WorkoutActivity extends AppCompatActivity implements OnCheckboxChec
             startActivity(settingsIntent);
         });
 
+        // Add exercise asset functionality
         Intent addExerciseIntent = new Intent(WorkoutActivity.this, AddExerciseActivity.class);
 
         Button addExerciseButton = findViewById(R.id.addExerciseButton);
@@ -90,6 +97,7 @@ public class WorkoutActivity extends AppCompatActivity implements OnCheckboxChec
             startActivity(addExerciseIntent);
         });
 
+        // Finish / save exercise asset functionality
         Button finishButton = findViewById(R.id.finishButton);
         finishButton.setOnClickListener(view -> {
             exerciseList.setVisibility(View.INVISIBLE);
@@ -109,6 +117,7 @@ public class WorkoutActivity extends AppCompatActivity implements OnCheckboxChec
         });
     }
 
+    // Method to start rest timer when check box is checked
     @Override
     public void onCheckboxChecked(int restTimer) {
         if (activeRestTimer != null) {
@@ -135,6 +144,7 @@ public class WorkoutActivity extends AppCompatActivity implements OnCheckboxChec
         }.start();
     }
 
+    // method to load list with old / new info
     public void refreshList() {
         ArrayList<String> exerciseNames = new ArrayList<>();
         ArrayList<Integer> restTimers = new ArrayList<>();

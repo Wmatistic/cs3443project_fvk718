@@ -7,8 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+// File Utilities class used for copying asset files to phone storage
 public class FileUtils {
 
+    // Copy asset folder to internal storage
     public static void copyAssetsFolderToInternalStorage(Context context, String folderName) {
         AssetManager assetManager = context.getAssets();
 
@@ -31,6 +33,7 @@ public class FileUtils {
         }
     }
 
+    // Copy asset file to internal storage
     private static void copyAssetFileToInternalStorage(Context context, String assetFileName) {
         AssetManager assetManager = context.getAssets();
 

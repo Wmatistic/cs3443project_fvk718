@@ -25,12 +25,15 @@ import edu.utsa.cs3443.cs3443project_fvk718.MainActivity;
 import edu.utsa.cs3443.cs3443project_fvk718.R;
 import edu.utsa.cs3443.cs3443project_fvk718.WorkoutActivity;
 
+// List adapter for the exercise list
 public class ExerciseListAdapter extends ArrayAdapter<String> {
     private final Activity context;
     private final Workout workout;
 
     private final ArrayList<String> exerciseNames;
     private final ArrayList<Integer> restTimers;
+
+    // Because there are multiple set lists nested in the exercise list items they are stored in an array to be easily addressed based on the position of the exercise list item
     private RecyclerView[] setList;
     private SetListAdapter adapter;
 
@@ -44,9 +47,11 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         this.setList = new RecyclerView[workout.getExercises().size()];
     }
 
+    // Method called when list item is created, used to set assets and functionality
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        // Inflate exercise list item
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.exerciselistitem, null, true);
 
@@ -55,10 +60,13 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         ImageView deleteExerciseImage = rowView.findViewById(R.id.deleteExerciseImage);
         Button editExerciseButton = rowView.findViewById(R.id.editExerciseButton);
 
+        // Set the set list in the list of set lists
         setList[position] = rowView.findViewById(R.id.setList);
 
+        // Refresh the list with the new / initial data
         refreshList(workout.getExercises().get(position), position);
 
+        // Add set functionality
         Button addSetButton = rowView.findViewById(R.id.addSetButton);
         addSetButton.setOnClickListener(view -> {
             workout.getExercises().get(position).getSets().add(0);
@@ -69,11 +77,13 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         nameText.setText(exerciseNames.get(position));
         restTimer.setText("Rest Timer: " + restTimers.get(position) + " seconds");
 
+        // Delete set functionality
         deleteExerciseImage.setOnClickListener(view -> {
             workout.deleteExercise(workout.getExercises().get(position));
             context.recreate();
         });
 
+        // Edit set functionality
         Intent editIntent = new Intent(context, AddExerciseActivity.class);
         editExerciseButton.setOnClickListener(view -> {
             editIntent.putExtra("Workout", workout);
@@ -85,6 +95,7 @@ public class ExerciseListAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 
+    // Refresh the set list at the given position using the set list adapter class
     public void refreshList(Exercise exercise, int position) {
         adapter = new SetListAdapter(this.context, exercise, (OnCheckboxCheckedListener) context);
         setList[position].setAdapter(adapter);

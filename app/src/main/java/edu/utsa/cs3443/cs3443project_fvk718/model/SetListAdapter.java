@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import edu.utsa.cs3443.cs3443project_fvk718.R;
 
+// List adapter for set list
 public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHolder> {
     private final Activity context;
 
@@ -35,6 +36,7 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
     private final int restTimer;
     private final OnCheckboxCheckedListener listener;
 
+    // View holder that contains each list items assets
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView setNumber;
         public TextInputLayout setWeight;
@@ -57,6 +59,7 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
         }
     }
 
+    // Constructor that initializes assets / lists of all the set list contents
     public SetListAdapter(Activity context, Exercise exercise, OnCheckboxCheckedListener listener) {
         this.context = context;
         this.exercise = exercise;
@@ -78,6 +81,7 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
         }
     }
 
+    // Method that uses the setlistitem.xml layout file to create the view holder for each list item
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -85,13 +89,16 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
         return new MyViewHolder(itemView);
     }
 
+    // Method that is called once the list item is bound to the list, position is the position of the list item and used to change the assets
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
         myViewHolder.setNumber.setText(String.valueOf(setNumbers.get(position)));
 
+        // Get shared preference boolean for show previous values setting
         SharedPreferences prefs = context.getSharedPreferences("AppPrefs", MODE_PRIVATE);
         boolean showPrevValues = prefs.getBoolean("showPrevValues", true);
 
+        // Set weights and reps hint text based on previous values if the setting is on
         if (weights.get(position) == 0 || !showPrevValues) {
             myViewHolder.setWeight.setHint("Weight");
         } else {
@@ -104,9 +111,8 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
             myViewHolder.setReps.setHint(String.valueOf(reps.get(position)));
         }
 
-        //myViewHolder.finishSetCheckBox.setOnCheckedChangeListener(null);
+        // If checked box is checked call onCheckboxChecked() method in WorkoutActivity
         myViewHolder.finishSetCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b && listener != null) {
@@ -115,12 +121,14 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
             }
         });
 
+        // Logic for removing set and refreshing list
         myViewHolder.deleteSetImage.setOnClickListener(view -> {
             exercise.getSets().remove((myViewHolder.getAdapterPosition()*2) + 1);
             exercise.getSets().remove(myViewHolder.getAdapterPosition()*2);
             context.recreate();
         });
 
+        // Functionality to set the set weight / reps to the inputted text
         myViewHolder.weightEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -164,6 +172,7 @@ public class SetListAdapter extends RecyclerView.Adapter<SetListAdapter.MyViewHo
         });
     }
 
+    // Get the number of sets in the list
     @Override
     public int getItemCount() {
         return setNumbers.size();

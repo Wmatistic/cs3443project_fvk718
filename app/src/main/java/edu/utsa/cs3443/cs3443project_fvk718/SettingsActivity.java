@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
 
+// Settings screen
 public class SettingsActivity extends AppCompatActivity {
 
     Workout workout;
@@ -35,9 +36,11 @@ public class SettingsActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Getting current workout
         Intent callingIntent = getIntent();
         workout = (Workout) callingIntent.getSerializableExtra("Workout");
 
+        // Close settings page functionality
         TextView doneText = findViewById(R.id.doneSettingsText);
 
         Intent doneIntent = new Intent(SettingsActivity.this, WorkoutActivity.class);
@@ -46,6 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(doneIntent);
         });
 
+        // Show previous workout values setting functionality, using shared preferences to have it carry over through restarts
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
 
         Switch showPrevValuesSwitch = findViewById(R.id.showPrevValuesSwitch);
@@ -60,6 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // Default number of sets generated setting functionality, using shared preferences to have it carry over through restarts
         EditText defaultSetTextInput = findViewById(R.id.defaultSetTextInput);
         int defaultSetNumber = prefs.getInt("defaultSetsNumber", 0);
         defaultSetTextInput.setText(String.valueOf(defaultSetNumber));

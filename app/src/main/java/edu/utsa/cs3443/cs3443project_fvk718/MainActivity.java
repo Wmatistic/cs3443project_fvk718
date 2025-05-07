@@ -20,6 +20,7 @@ import edu.utsa.cs3443.cs3443project_fvk718.model.RoutineListAdapter;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Routines;
 import edu.utsa.cs3443.cs3443project_fvk718.model.Workout;
 
+// Main Screen
 public class MainActivity extends AppCompatActivity {
 
     private Routines routines;
@@ -36,9 +37,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+
+        // Copy .csv files in asset folder to phones internal storage
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         boolean isFirstRun = prefs.getBoolean("isFirstRun", true);
-
         if (isFirstRun) {
             FileUtils.copyAssetsFolderToInternalStorage(this, "");
 
@@ -47,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
         }
 
+        // Load the routines, workouts, and exercises from the .csv files
         loadRoutines();
 
+        // Workout list initialization / functionality
         workoutIntent = new Intent(MainActivity.this, WorkoutActivity.class);
 
         Button emptyWorkout = findViewById(R.id.emptyWorkoutButton);
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    // Method used to initialize routines, workouts, and exercises
     private void loadRoutines() {
         routines = new Routines(this);
     }
