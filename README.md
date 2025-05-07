@@ -14,7 +14,7 @@ If Android Studio has loaded the project properly then you should be able to run
 If you have any issues with this please email me at Johnmatistic@gmail.com
 
 ## Known Issues
-As mentioned above, adding workout csv files manually can easily create errors because of discrepancies in formatting.
+As mentioned above, adding workout csv files manually can potentially cause errors because of discrepancies in formatting.
 
 The app sometimes slows down because of an unknown reason when Android Studio has been open for longer periods of time, a restart of your Android Studio should fix this.
 
